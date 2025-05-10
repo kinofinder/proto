@@ -60,13 +60,12 @@ func (*RandomRequest) Descriptor() ([]byte, []int) {
 type RandomResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Description   string                 `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
-	Rating        []float64              `protobuf:"fixed64,3,rep,packed,name=rating,proto3" json:"rating,omitempty"`
+	Year          int32                  `protobuf:"varint,2,opt,name=year,proto3" json:"year,omitempty"`
+	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	Length        int32                  `protobuf:"varint,4,opt,name=length,proto3" json:"length,omitempty"`
-	Poster        []string               `protobuf:"bytes,5,rep,name=poster,proto3" json:"poster,omitempty"`
-	Genres        []string               `protobuf:"bytes,6,rep,name=genres,proto3" json:"genres,omitempty"`
-	Countries     []string               `protobuf:"bytes,7,rep,name=countries,proto3" json:"countries,omitempty"`
-	Premiere      []string               `protobuf:"bytes,8,rep,name=premiere,proto3" json:"premiere,omitempty"`
+	Poster        string                 `protobuf:"bytes,5,opt,name=poster,proto3" json:"poster,omitempty"`
+	Genres        []*Genre               `protobuf:"bytes,6,rep,name=genres,proto3" json:"genres,omitempty"`
+	Countries     []*Country             `protobuf:"bytes,7,rep,name=countries,proto3" json:"countries,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -108,18 +107,18 @@ func (x *RandomResponse) GetName() string {
 	return ""
 }
 
+func (x *RandomResponse) GetYear() int32 {
+	if x != nil {
+		return x.Year
+	}
+	return 0
+}
+
 func (x *RandomResponse) GetDescription() string {
 	if x != nil {
 		return x.Description
 	}
 	return ""
-}
-
-func (x *RandomResponse) GetRating() []float64 {
-	if x != nil {
-		return x.Rating
-	}
-	return nil
 }
 
 func (x *RandomResponse) GetLength() int32 {
@@ -129,32 +128,113 @@ func (x *RandomResponse) GetLength() int32 {
 	return 0
 }
 
-func (x *RandomResponse) GetPoster() []string {
+func (x *RandomResponse) GetPoster() string {
 	if x != nil {
 		return x.Poster
 	}
-	return nil
+	return ""
 }
 
-func (x *RandomResponse) GetGenres() []string {
+func (x *RandomResponse) GetGenres() []*Genre {
 	if x != nil {
 		return x.Genres
 	}
 	return nil
 }
 
-func (x *RandomResponse) GetCountries() []string {
+func (x *RandomResponse) GetCountries() []*Country {
 	if x != nil {
 		return x.Countries
 	}
 	return nil
 }
 
-func (x *RandomResponse) GetPremiere() []string {
+type Genre struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Genre) Reset() {
+	*x = Genre{}
+	mi := &file_infopuller_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Genre) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Genre) ProtoMessage() {}
+
+func (x *Genre) ProtoReflect() protoreflect.Message {
+	mi := &file_infopuller_proto_msgTypes[2]
 	if x != nil {
-		return x.Premiere
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
 	}
-	return nil
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Genre.ProtoReflect.Descriptor instead.
+func (*Genre) Descriptor() ([]byte, []int) {
+	return file_infopuller_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *Genre) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+type Country struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Country) Reset() {
+	*x = Country{}
+	mi := &file_infopuller_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Country) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Country) ProtoMessage() {}
+
+func (x *Country) ProtoReflect() protoreflect.Message {
+	mi := &file_infopuller_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Country.ProtoReflect.Descriptor instead.
+func (*Country) Descriptor() ([]byte, []int) {
+	return file_infopuller_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *Country) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
 }
 
 var File_infopuller_proto protoreflect.FileDescriptor
@@ -163,16 +243,19 @@ const file_infopuller_proto_rawDesc = "" +
 	"\n" +
 	"\x10infopuller.proto\x12\n" +
 	"infopuller\"\x0f\n" +
-	"\rRandomRequest\"\xe0\x01\n" +
+	"\rRandomRequest\"\xe8\x01\n" +
 	"\x0eRandomResponse\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
-	"\vdescription\x18\x02 \x01(\tR\vdescription\x12\x16\n" +
-	"\x06rating\x18\x03 \x03(\x01R\x06rating\x12\x16\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x12\n" +
+	"\x04year\x18\x02 \x01(\x05R\x04year\x12 \n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x12\x16\n" +
 	"\x06length\x18\x04 \x01(\x05R\x06length\x12\x16\n" +
-	"\x06poster\x18\x05 \x03(\tR\x06poster\x12\x16\n" +
-	"\x06genres\x18\x06 \x03(\tR\x06genres\x12\x1c\n" +
-	"\tcountries\x18\a \x03(\tR\tcountries\x12\x1a\n" +
-	"\bpremiere\x18\b \x03(\tR\bpremiere2M\n" +
+	"\x06poster\x18\x05 \x01(\tR\x06poster\x12)\n" +
+	"\x06genres\x18\x06 \x03(\v2\x11.infopuller.GenreR\x06genres\x121\n" +
+	"\tcountries\x18\a \x03(\v2\x13.infopuller.CountryR\tcountries\"\x1b\n" +
+	"\x05Genre\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"\x1d\n" +
+	"\aCountry\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name2M\n" +
 	"\n" +
 	"InfoPuller\x12?\n" +
 	"\x06Random\x12\x19.infopuller.RandomRequest\x1a\x1a.infopuller.RandomResponseB\x1cZ\x1ago/infopuller;infopullerpbb\x06proto3"
@@ -189,19 +272,23 @@ func file_infopuller_proto_rawDescGZIP() []byte {
 	return file_infopuller_proto_rawDescData
 }
 
-var file_infopuller_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_infopuller_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_infopuller_proto_goTypes = []any{
 	(*RandomRequest)(nil),  // 0: infopuller.RandomRequest
 	(*RandomResponse)(nil), // 1: infopuller.RandomResponse
+	(*Genre)(nil),          // 2: infopuller.Genre
+	(*Country)(nil),        // 3: infopuller.Country
 }
 var file_infopuller_proto_depIdxs = []int32{
-	0, // 0: infopuller.InfoPuller.Random:input_type -> infopuller.RandomRequest
-	1, // 1: infopuller.InfoPuller.Random:output_type -> infopuller.RandomResponse
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	2, // 0: infopuller.RandomResponse.genres:type_name -> infopuller.Genre
+	3, // 1: infopuller.RandomResponse.countries:type_name -> infopuller.Country
+	0, // 2: infopuller.InfoPuller.Random:input_type -> infopuller.RandomRequest
+	1, // 3: infopuller.InfoPuller.Random:output_type -> infopuller.RandomResponse
+	3, // [3:4] is the sub-list for method output_type
+	2, // [2:3] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_infopuller_proto_init() }
@@ -215,7 +302,7 @@ func file_infopuller_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_infopuller_proto_rawDesc), len(file_infopuller_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
