@@ -60,12 +60,13 @@ func (*RandomRequest) Descriptor() ([]byte, []int) {
 type RandomResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Year          int32                  `protobuf:"varint,2,opt,name=year,proto3" json:"year,omitempty"`
-	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	Length        int32                  `protobuf:"varint,4,opt,name=length,proto3" json:"length,omitempty"`
-	Poster        string                 `protobuf:"bytes,5,opt,name=poster,proto3" json:"poster,omitempty"`
-	Genres        []*Genre               `protobuf:"bytes,6,rep,name=genres,proto3" json:"genres,omitempty"`
-	Countries     []*Country             `protobuf:"bytes,7,rep,name=countries,proto3" json:"countries,omitempty"`
+	Type          string                 `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
+	Year          int32                  `protobuf:"varint,3,opt,name=year,proto3" json:"year,omitempty"`
+	Description   string                 `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	Length        int32                  `protobuf:"varint,5,opt,name=length,proto3" json:"length,omitempty"`
+	Poster        string                 `protobuf:"bytes,6,opt,name=poster,proto3" json:"poster,omitempty"`
+	Genres        []*Genre               `protobuf:"bytes,7,rep,name=genres,proto3" json:"genres,omitempty"`
+	Countries     []*Country             `protobuf:"bytes,8,rep,name=countries,proto3" json:"countries,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -103,6 +104,13 @@ func (*RandomResponse) Descriptor() ([]byte, []int) {
 func (x *RandomResponse) GetName() string {
 	if x != nil {
 		return x.Name
+	}
+	return ""
+}
+
+func (x *RandomResponse) GetType() string {
+	if x != nil {
+		return x.Type
 	}
 	return ""
 }
@@ -243,15 +251,16 @@ const file_infopuller_proto_rawDesc = "" +
 	"\n" +
 	"\x10infopuller.proto\x12\n" +
 	"infopuller\"\x0f\n" +
-	"\rRandomRequest\"\xe8\x01\n" +
+	"\rRandomRequest\"\xfc\x01\n" +
 	"\x0eRandomResponse\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x12\n" +
-	"\x04year\x18\x02 \x01(\x05R\x04year\x12 \n" +
-	"\vdescription\x18\x03 \x01(\tR\vdescription\x12\x16\n" +
-	"\x06length\x18\x04 \x01(\x05R\x06length\x12\x16\n" +
-	"\x06poster\x18\x05 \x01(\tR\x06poster\x12)\n" +
-	"\x06genres\x18\x06 \x03(\v2\x11.infopuller.GenreR\x06genres\x121\n" +
-	"\tcountries\x18\a \x03(\v2\x13.infopuller.CountryR\tcountries\"\x1b\n" +
+	"\x04type\x18\x02 \x01(\tR\x04type\x12\x12\n" +
+	"\x04year\x18\x03 \x01(\x05R\x04year\x12 \n" +
+	"\vdescription\x18\x04 \x01(\tR\vdescription\x12\x16\n" +
+	"\x06length\x18\x05 \x01(\x05R\x06length\x12\x16\n" +
+	"\x06poster\x18\x06 \x01(\tR\x06poster\x12)\n" +
+	"\x06genres\x18\a \x03(\v2\x11.infopuller.GenreR\x06genres\x121\n" +
+	"\tcountries\x18\b \x03(\v2\x13.infopuller.CountryR\tcountries\"\x1b\n" +
 	"\x05Genre\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\"\x1d\n" +
 	"\aCountry\x12\x12\n" +
