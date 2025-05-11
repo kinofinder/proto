@@ -12,12 +12,13 @@ message RandomRequest {}
 
 message RandomResponse {
     string name = 1;
-    int32 year = 2;
-    string description = 3;
-    int32 length = 4;
-    string poster = 5;
-    repeated Genre genres = 6;
-    repeated Country countries = 7;
+    string type = 2;
+    int32 year = 3;
+    string description = 4;
+    int32 length = 5;
+    string poster = 6;
+    repeated Genre genres = 7;
+    repeated Country countries = 8;
 }
 
 message Genre {
